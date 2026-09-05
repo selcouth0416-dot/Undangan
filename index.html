@@ -8,7 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
   <style>
     :root {
@@ -61,7 +64,7 @@
     }
 
     /* ============================================================
-       HALAMAN 1: GERBANG PRIVATE (INPUT NAMA TAMU)
+       HALAMAN 1: GERBANG PRIVATE
        ============================================================ */
     #page-1 {
       position: fixed;
@@ -165,7 +168,7 @@
     }
 
     /* ============================================================
-       HALAMAN 2: MESIN CASINO PINK (PERSIS FOTO & TEGAK)
+       HALAMAN 2: MESIN CASINO PINK
        ============================================================ */
     #page-2 {
       position: fixed;
@@ -249,7 +252,7 @@
       font-size: 13px;
       font-weight: 900;
       letter-spacing: 3px;
-      box-shadow: 0 4px 10px rgba(184, 118, 129, 0.3), inset 0 1px 3px rgba(255,255,255,0.5);
+      box-shadow: 0 4px 10px rgba(184, 118, 129, 0.3);
       margin-bottom: 18px;
     }
 
@@ -262,7 +265,7 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      box-shadow: inset 0 8px 14px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: inset 0 8px 14px rgba(0,0,0,0.12);
     }
 
     .reel-col {
@@ -272,7 +275,6 @@
       background: #faf8f8;
       border-radius: 12px;
       border: 1.5px solid #ebd5d8;
-      box-shadow: inset 0 6px 10px rgba(0,0,0,0.06), inset 0 -6px 10px rgba(0,0,0,0.06);
     }
 
     .reel-strip {
@@ -309,7 +311,6 @@
       height: 36px;
       background: linear-gradient(to right, #ba6f7c, #f4bec8);
       border-radius: 0 10px 10px 0;
-      box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
     }
 
     .lever-stem {
@@ -322,7 +323,6 @@
       border-radius: 4px;
       transform-origin: bottom center;
       transition: transform 0.45s ease;
-      box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
     }
 
     .lever-head-ball {
@@ -333,7 +333,7 @@
       height: 32px;
       background: radial-gradient(circle at 35% 35%, #ff4b4b, #990000);
       border-radius: 50%;
-      box-shadow: 0 6px 14px rgba(184, 30, 30, 0.4), inset 0 2px 5px rgba(255,255,255,0.6);
+      box-shadow: 0 6px 14px rgba(184, 30, 30, 0.4);
     }
 
     .lever-pulled .lever-stem {
@@ -356,7 +356,7 @@
     }
 
     /* ============================================================
-       HALAMAN BARU (TRANSISI VIP SETELAH ROULETTE)
+       HALAMAN TRANSISI VIP SAMBUTAN RESMI
        ============================================================ */
     #page-greet {
       display: none;
@@ -382,9 +382,8 @@
       border: 2px solid #ecd5be;
       border-radius: 28px;
       padding: 40px 24px 34px;
-      box-shadow: 0 25px 60px rgba(84, 49, 41, 0.18), 0 0 20px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 25px 60px rgba(84, 49, 41, 0.18);
       animation: scaleFadeIn 1s ease;
-      position: relative;
     }
 
     @keyframes scaleFadeIn {
@@ -436,7 +435,7 @@
     }
 
     /* ============================================================
-       HALAMAN 3: UNDANGAN UTAMA (DENGAN ANIMASI FOTO GERAK)
+       HALAMAN 3: UNDANGAN UTAMA
        ============================================================ */
     #page-3 {
       display: none;
@@ -460,7 +459,6 @@
       text-align: center;
     }
 
-    /* Animasi Foto Utama Bergerak Halus */
     .hero-bg {
       position: absolute;
       inset: 0;
@@ -540,7 +538,7 @@
       margin-top: 4px;
     }
 
-    /* Kolase Foto Bergerak & Narasi Panjang */
+    /* Galeri Foto Kolase Chapter */
     .gallery-section {
       padding: 45px 20px 50px;
       background: var(--cream-bg);
@@ -569,7 +567,6 @@
       position: relative;
     }
 
-    /* Animasi foto bergerak (Ken-Burns Floating) */
     .photo-frame img {
       width: 100%;
       height: 100%;
@@ -770,7 +767,7 @@
     }
 
     /* ============================================================
-       HALAMAN 4: DAFTAR TAMU & CHAT ROOM (DENGAN SLOW AUTO-SCROLL)
+       HALAMAN 4: LIVE ATTENDANCE & CHAT ROOM REALTIME
        ============================================================ */
     #page-4 {
       display: none;
@@ -808,11 +805,11 @@
       border-radius: 12px;
       margin-bottom: 10px;
       border-left: 4px solid var(--gold-primary);
-      animation: fadeInCard 0.6s ease;
+      animation: fadeInCard 0.5s ease;
     }
 
     @keyframes fadeInCard {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -1152,7 +1149,9 @@
       <div style="font-family:'Cinzel',serif; font-size:12px; letter-spacing:1.5px; color:var(--gold-dark); font-weight:700; margin-bottom:14px; text-transform:uppercase;">
         Semua Tamu Yang Terdaftar (<span id="total-guests">0</span>)
       </div>
-      <div id="active-guests-list"></div>
+      <div id="active-guests-list">
+        <div style="font-size:13px; color:var(--muted); text-align:center; padding:12px;">Memuat daftar tamu realtime...</div>
+      </div>
     </div>
 
     <h2 class="section-title">Wishes & Prayers</h2>
@@ -1170,15 +1169,124 @@
       </form>
     </div>
 
-    <div class="wishes-feed" id="wishes-container"></div>
+    <div class="wishes-feed" id="wishes-container">
+      <div style="font-size:13px; color:var(--muted); text-align:center; padding:12px;">Memuat pesan doa...</div>
+    </div>
   </div>
 
   <script>
     let currentGuestName = "";
 
-    // ===============================================
+    // ==========================================================
+    // 0. FIREBASE REALTIME CLOUD DATABASE (PUBLIC REALTIME SYNC)
+    // ==========================================================
+    const firebaseConfig = {
+      databaseURL: "https://wedding-baek-ikyy-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+
+    let db = null;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.database();
+    } catch (e) {
+      console.log("Firebase initialized");
+    }
+
+    // Mendengarkan data tamu secara LIVE realtime dari cloud
+    function initRealtimeSync() {
+      if (!db) return;
+
+      // 1. Sync Live Attendance
+      db.ref("guests").on("value", (snapshot) => {
+        const data = snapshot.val();
+        const container = document.getElementById("active-guests-list");
+        const counter = document.getElementById("total-guests");
+        
+        let guestList = [];
+        if (data) {
+          guestList = Object.values(data);
+        } else {
+          guestList = JSON.parse(localStorage.getItem('wedding_global_guests') || '[]');
+        }
+
+        counter.innerText = guestList.length;
+        container.innerHTML = "";
+
+        if (guestList.length === 0) {
+          container.innerHTML = "<div style='font-size:13px; color:var(--muted); text-align:center; padding:10px;'>Belum ada tamu lain yang hadir. Jadilah yang pertama!</div>";
+          return;
+        }
+
+        // Tampilkan urutan dari yang paling baru
+        guestList.reverse().forEach(g => {
+          const item = document.createElement("div");
+          item.className = "guest-item";
+          item.innerHTML = `
+            <div>
+              <div class="guest-name-txt">${g.name}</div>
+              <div style="font-size:11px; color:var(--muted); margin-top:2px;">Tercatat hadir: ${g.time}</div>
+            </div>
+            <div class="guest-status-pill">Telah Hadir ✓</div>
+          `;
+          container.appendChild(item);
+        });
+      });
+
+      // 2. Sync Live Chat Room (Wishes)
+      db.ref("wishes").on("value", (snapshot) => {
+        const data = snapshot.val();
+        const container = document.getElementById("wishes-container");
+        container.innerHTML = "";
+
+        let wishesList = [];
+        if (data) {
+          wishesList = Object.values(data);
+        } else {
+          wishesList = JSON.parse(localStorage.getItem('wedding_wishes_records') || '[]');
+        }
+
+        if (wishesList.length === 0) {
+          container.innerHTML = "<div style='font-size:13px; color:var(--muted); text-align:center; padding:10px;'>Belum ada ucapan doa. Tuliskan ucapan Anda di atas!</div>";
+          return;
+        }
+
+        wishesList.reverse().forEach(w => {
+          const bubble = document.createElement("div");
+          bubble.className = "wish-bubble";
+          bubble.innerHTML = `
+            <div class="wish-author">
+              <span>${w.name}</span>
+              <span class="wish-time">${w.time}</span>
+            </div>
+            <div class="wish-message">${w.msg}</div>
+          `;
+          container.appendChild(bubble);
+        });
+      });
+    }
+
+    // Simpan kehadiran secara LIVE ke cloud
+    function broadcastGuestPresence(name) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+      const guestObj = { name: name, time: timeStr, timestamp: Date.now() };
+
+      // Simpan di memori lokal sebagai cadangan
+      let localList = JSON.parse(localStorage.getItem('wedding_global_guests') || '[]');
+      if (!localList.some(g => g.name.toLowerCase() === name.toLowerCase())) {
+        localList.push(guestObj);
+        localStorage.setItem('wedding_global_guests', JSON.stringify(localList));
+      }
+
+      // Kirim langsung ke Firebase Cloud Database
+      if (db) {
+        db.ref("guests").push(guestObj);
+      }
+    }
+
+    // ==========================================================
     // 1. SISTEM HALAMAN 1 (PRIVATE ROOM ENTER)
-    // ===============================================
+    // ==========================================================
     function enterPrivateRoom() {
       const nameInput = document.getElementById('guest-name-input');
       const val = nameInput.value.trim();
@@ -1194,9 +1302,10 @@
       document.getElementById('chat-guest-name').value = currentGuestName;
       document.getElementById('greet-name-display').innerText = currentGuestName;
 
-      saveGuestRecord(currentGuestName);
+      // Broadcast langsung kehadiran tamu ke semua perangkat
+      broadcastGuestPresence(currentGuestName);
 
-      // Transisi Halus Menuju Halaman 2 (Mesin Kasino)
+      // Transisi Menuju Halaman 2 (Mesin Slot)
       const p1 = document.getElementById('page-1');
       p1.style.transform = 'scale(1.1) translateY(-100vh)';
       p1.style.opacity = '0';
@@ -1208,50 +1317,9 @@
       }, 700);
     }
 
-    // ===============================================
-    // 2. DAFTAR TAMU TERBUKA (GLOBAL STORAGE)
-    // ===============================================
-    function saveGuestRecord(name) {
-      let list = JSON.parse(localStorage.getItem('wedding_global_guests') || '[]');
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' WIB';
-
-      const exists = list.some(g => g.name.toLowerCase() === name.toLowerCase());
-      if (!exists) {
-        list.unshift({ name: name, time: timeStr });
-        localStorage.setItem('wedding_global_guests', JSON.stringify(list));
-      }
-    }
-
-    function renderGuests() {
-      const container = document.getElementById('active-guests-list');
-      const counter = document.getElementById('total-guests');
-      let list = JSON.parse(localStorage.getItem('wedding_global_guests') || '[]');
-
-      if (list.length === 0 && currentGuestName) {
-        list = [{ name: currentGuestName, time: 'Baru saja' }];
-      }
-
-      counter.innerText = list.length;
-      container.innerHTML = '';
-
-      list.forEach(g => {
-        const item = document.createElement('div');
-        item.className = 'guest-item';
-        item.innerHTML = `
-          <div>
-            <div class="guest-name-txt">${g.name}</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Tercatat hadir: ${g.time}</div>
-          </div>
-          <div class="guest-status-pill">Telah Hadir ✓</div>
-        `;
-        container.appendChild(item);
-      });
-    }
-
-    // ===============================================
-    // 3. AUDIO SYNTHESIZER: SUARA ROULETTE ASLI
-    // ===============================================
+    // ==========================================================
+    // 2. AUDIO SYNTHESIZER: SUARA ROULETTE ASLI
+    // ==========================================================
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1322,9 +1390,9 @@
       step();
     }
 
-    // ===============================================
-    // 4. BACKGROUND MUSIC CONTROLLER
-    // ===============================================
+    // ==========================================================
+    // 3. BACKGROUND MUSIC CONTROLLER
+    // ==========================================================
     const bgAudio = document.getElementById('bg-audio');
     const musicBtn = document.getElementById('music-toggle');
 
@@ -1337,9 +1405,9 @@
       }
     }
 
-    // ===============================================
-    // 5. STRIP PUTARAN MESIN KASINO
-    // ===============================================
+    // ==========================================================
+    // 4. STRIP PUTARAN MESIN KASINO
+    // ==========================================================
     const days = ["♡", "05", "12", "19", "03", "16", "28", "07", "14", "21", "09", "18", "25", "02", "11", "20", "15", "08", "24", "17", "10", "14", "18", "20", "22"];
     const months = ["♡", "JAN", "APR", "JUL", "NOV", "FEB", "MEI", "SEP", "DES", "MAR", "JUN", "OKT", "AGU", "JAN", "MEI", "JUL", "DES", "FEB", "APR", "JUN", "AGU", "SEP", "NOV", "SEP", "OKT"];
     const years = ["♡", "2024", "2025", "2024", "2025", "2024", "2025", "2024", "2026", "2025", "2024", "2025", "2026", "2024", "2025", "2025", "2024", "2026", "2025", "2025", "2025", "2026", "2026", "2026", "2026"];
@@ -1383,7 +1451,6 @@
       document.getElementById('reel-month').style.transform = `translateY(-${targetMonthIndex * itemHeight}px)`;
       document.getElementById('reel-year').style.transform = `translateY(-${targetYearIndex * itemHeight}px)`;
 
-      // Setelah Gulungan Berhenti: Munculkan Konfeti & Buka Halaman Sambutan Baru
       setTimeout(() => {
         confetti({
           particleCount: 130,
@@ -1408,7 +1475,6 @@
       }, 5400);
     }
 
-    // Dari Halaman Sambutan Masuk ke Undangan Utama
     function openMainInvitation() {
       const pGreet = document.getElementById('page-greet');
       pGreet.style.opacity = '0';
@@ -1421,14 +1487,13 @@
       }, 700);
     }
 
-    // ===============================================
-    // 6. NAVIGASI HALAMAN 3 & 4
-    // ===============================================
+    // ==========================================================
+    // 5. NAVIGASI HALAMAN 3 & 4
+    // ==========================================================
     function goToPage4() {
       document.getElementById('page-3').style.display = 'none';
       document.getElementById('page-4').style.display = 'block';
       window.scrollTo(0, 0);
-      renderGuests();
     }
 
     function backToPage3() {
@@ -1438,12 +1503,12 @@
       triggerScrollReveal();
     }
 
-    // Animasi Gulir Lambat Lembut di Halaman 4
+    // Fitur Gulir Lambat Lembut di Halaman 4
     function startGentleSlowScroll() {
       const targetY = document.body.scrollHeight;
       const startY = window.pageYOffset;
       const distance = targetY - startY;
-      const duration = 12000; // 12 detik meluncur perlahan
+      const duration = 14000; // 14 detik meluncur anggun
       let start = null;
 
       function step(timestamp) {
@@ -1459,9 +1524,9 @@
       window.requestAnimationFrame(step);
     }
 
-    // ===============================================
-    // 7. COUNTDOWN TIMER
-    // ===============================================
+    // ==========================================================
+    // 6. COUNTDOWN TIMER
+    // ==========================================================
     const targetDate = new Date('October 22, 2026 09:00:00').getTime();
 
     function updateCountdown() {
@@ -1478,9 +1543,9 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // ===============================================
-    // 8. SCROLL REVEAL & WISHES
-    // ===============================================
+    // ==========================================================
+    // 7. SCROLL REVEAL & LIVE WISHES SUBMISSION
+    // ==========================================================
     function triggerScrollReveal() {
       const reveals = document.querySelectorAll('.reveal');
       reveals.forEach(el => {
@@ -1491,44 +1556,32 @@
     }
     window.addEventListener('scroll', triggerScrollReveal);
 
-    function loadSavedWishes() {
-      const saved = JSON.parse(localStorage.getItem('wedding_wishes_records') || '[]');
-      saved.forEach(w => appendWishBubble(w.name, w.msg, w.time, false));
-    }
-
-    function appendWishBubble(name, msg, time, isNew) {
-      const container = document.getElementById('wishes-container');
-      const bubble = document.createElement('div');
-      bubble.className = 'wish-bubble';
-      bubble.innerHTML = `
-        <div class="wish-author">
-          <span>${name}</span>
-          <span class="wish-time">${time}</span>
-        </div>
-        <div class="wish-message">${msg}</div>
-      `;
-      if (isNew) container.insertBefore(bubble, container.firstChild);
-      else container.appendChild(bubble);
-    }
-
     function submitWish(e) {
       e.preventDefault();
       const msgInput = document.getElementById('guest-msg');
       const msg = msgInput.value.trim();
 
       if (currentGuestName && msg) {
-        const time = 'Baru saja';
-        appendWishBubble(currentGuestName, msg, time, true);
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+        const wishObj = { name: currentGuestName, msg: msg, time: timeStr, timestamp: Date.now() };
 
+        // Simpan lokal sebagai cadangan
         const saved = JSON.parse(localStorage.getItem('wedding_wishes_records') || '[]');
-        saved.unshift({ name: currentGuestName, msg, time });
+        saved.push(wishObj);
         localStorage.setItem('wedding_wishes_records', JSON.stringify(saved));
+
+        // Kirim langsung ke Cloud Database (Bisa langsung dilihat semua orang secara LIVE)
+        if (db) {
+          db.ref("wishes").push(wishObj);
+        }
 
         msgInput.value = '';
       }
     }
 
-    loadSavedWishes();
+    // Jalankan Sinkronisasi Realtime saat halaman dibuka
+    initRealtimeSync();
   </script>
 </body>
 </html>
