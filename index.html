@@ -1,141 +1,597 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Spesial Kita</title>
-    <style>
-        body {
-            font-family: 'Georgia', serif;
-            background-color: #fdf6f0;
-            color: #5d4037;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save the Date & Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        #music-control {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 16px;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            font-weight: bold;
-            font-size: 14px;
-        }
+  <style>
+    :root {
+      --bg-cream: #faf7f2;
+      --gold: #c5a059;
+      --gold-dark: #9e7b39;
+      --text-dark: #3a2e2b;
+      --text-muted: #7d7168;
+    }
 
-        .header {
-            padding: 90px 20px 60px 20px;
-            background-image: linear-gradient(to bottom, rgba(253,246,240,0.85), #fdf6f0), 
-                              url('foto-utama.JPG');
-            background-size: cover;
-            background-position: center;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            color: #8d6e63;
-        }
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        .memory-section {
-            padding: 40px 20px;
-        }
+    /* === SCREEN 1: SLOT MACHINE OVERLAY === */
+    #slot-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, #fffaf5 0%, #f3ede2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+    }
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+    .slot-sub {
+      letter-spacing: 3px;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 6px;
+    }
 
-        .gallery img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-        }
+    .slot-title {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: #3b2c28;
+      margin-bottom: 4px;
+    }
 
-        .map-section {
-            padding: 40px 20px 70px 20px;
-            background-color: #ffffff;
-        }
+    .slot-couple {
+      font-family: 'Great Vibes', cursive;
+      font-size: 26px;
+      color: var(--gold-dark);
+      margin-bottom: 24px;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background-color: #8d6e63;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            margin-top: 20px;
-            font-size: 16px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-        }
-    </style>
+    .machine-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .machine-body {
+      width: 250px;
+      background: linear-gradient(145deg, #f7dcd6, #f3cec5);
+      border: 4px solid #fff;
+      border-radius: 40px;
+      box-shadow: 0 15px 35px rgba(184, 137, 126, 0.25), inset 0 2px 5px rgba(255,255,255,0.8);
+      padding: 24px 18px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .machine-header {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: #fff;
+      background: #df9e94;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .reels-container {
+      display: flex;
+      gap: 8px;
+      background: #fff;
+      padding: 8px;
+      border-radius: 16px;
+      border: 2px solid #ecd0c9;
+      box-shadow: inset 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    .reel {
+      width: 62px;
+      height: 64px;
+      overflow: hidden;
+      background: #fafafa;
+      border-radius: 10px;
+      border: 1px solid #f0e1dd;
+      position: relative;
+    }
+
+    .reel-strip {
+      display: flex;
+      flex-direction: column;
+      transition: transform 3.5s cubic-bezier(0.12, 0.8, 0.32, 1);
+    }
+
+    .reel-item {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #4a3834;
+    }
+
+    /* Tuas / Lever */
+    .lever-container {
+      width: 32px;
+      height: 140px;
+      position: relative;
+      cursor: pointer;
+      margin-left: -6px;
+    }
+
+    .lever-pivot {
+      position: absolute;
+      bottom: 25px;
+      left: 0;
+      width: 14px;
+      height: 24px;
+      background: #d6988f;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .lever-rod {
+      position: absolute;
+      bottom: 35px;
+      left: 10px;
+      width: 6px;
+      height: 85px;
+      background: #b5b5b5;
+      border-radius: 3px;
+      transform-origin: bottom center;
+      transition: transform 0.4s ease;
+    }
+
+    .lever-knob {
+      position: absolute;
+      top: -14px;
+      left: -9px;
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle at 30% 30%, #ff6b6b, #b71c1c);
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .lever-pulled .lever-rod {
+      transform: scaleY(0.3) rotate(45deg);
+    }
+
+    .pull-text {
+      letter-spacing: 2px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9c6c64;
+      text-transform: uppercase;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.03); }
+    }
+
+    /* === SCREEN 2: INVITATION CONTENT === */
+    #invitation-content {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #ffffff;
+      min-height: 100vh;
+      box-shadow: 0 0 30px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Audio Toggle Floating Button */
+    #music-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-size: 16px;
+    }
+
+    .hero {
+      position: relative;
+      height: 70vh;
+      background: url('foto-utama.JPG') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px 20px;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.65) 100%);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-subtitle {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #f1dfbf;
+      margin-bottom: 6px;
+    }
+
+    .hero-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .hero-date {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+
+    .quote-box {
+      padding: 35px 25px 20px;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--gold-dark);
+    }
+
+    /* Countdown */
+    .countdown-section {
+      padding: 15px 20px 35px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .time-unit {
+      background: #faf7f2;
+      border: 1px solid #ebdccb;
+      padding: 12px 10px;
+      border-radius: 8px;
+      min-width: 65px;
+    }
+
+    .time-num {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold-dark);
+    }
+
+    .time-lbl {
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Gallery */
+    .gallery-section {
+      padding: 30px 20px;
+      background: #faf7f2;
+      text-align: center;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    /* Event Details & Location */
+    .event-section {
+      padding: 40px 20px 60px;
+      text-align: center;
+    }
+
+    .event-card {
+      border: 2px solid #ecdcc9;
+      border-radius: 15px;
+      padding: 30px 20px;
+      background: #fffdfa;
+      position: relative;
+    }
+
+    .event-card h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      color: var(--gold-dark);
+    }
+
+    .event-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .btn-maps {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(197, 160, 89, 0.35);
+    }
+  </style>
 </head>
 <body>
 
-    <div id="music-control" onclick="toggleMusic()">
-        🎵 <span id="music-status">Play Musik</span>
-    </div>
-    <audio id="myAudio" loop>
-        <source src="https://ia801503.us.archive.org/15/items/taylor-swift-love-story/Taylor%20Swift%20-%20Love%20Story.mp3" type="audio/mpeg">
-    </audio>
+  <audio id="bg-audio" loop preload="auto">
+    <source src="love-story.mp3" type="audio/mpeg">
+    <source src="https://ia801503.us.archive.org/15/items/taylor-swift-love-story/Taylor%20Swift%20-%20Love%20Story.mp3" type="audio/mpeg">
+  </audio>
 
-    <div class="header">
-        <h1>Perayaan Spesial Kami</h1>
-        <p><i>"You'll be the prince and I'll be the princess..."</i></p>
-        <h2>Alex & Sarah</h2>
-        <p>Sabtu, 12 Oktober 2024</p>
-    </div>
+  <div id="music-toggle" onclick="toggleAudio()">🎵</div>
 
-    <div class="memory-section">
-        <h3>Our Story in Pictures</h3>
-        <div class="gallery">
-            <img src="foto1.JPG" alt="Kenangan 1">
-            <img src="foto2.JPG" alt="Kenangan 2">
-            <img src="foto3.JPG" alt="Kenangan 3">
-            <img src="foto4.JPG" alt="Kenangan 4">
-            <img src="foto5.JPG" alt="Kenangan 5">
-            <img src="foto6.JPG" alt="Kenangan 6">
+  <div id="slot-screen">
+    <div class="slot-sub">Together With Their Families</div>
+    <h1 class="slot-title">Save the Date</h1>
+    <div class="slot-couple">Irina & Robert</div>
+
+    <div class="machine-wrapper">
+      <div class="machine-body">
+        <div class="machine-header">SAVE THE DATE</div>
+        <div class="reels-container">
+          <div class="reel"><div class="reel-strip" id="reel-day"></div></div>
+          <div class="reel"><div class="reel-strip" id="reel-month"></div></div>
+          <div class="reel"><div class="reel-strip" id="reel-year"></div></div>
         </div>
+      </div>
+
+      <div class="lever-container" id="lever" onclick="pullLever()">
+        <div class="lever-pivot"></div>
+        <div class="lever-rod">
+          <div class="lever-knob"></div>
+        </div>
+      </div>
     </div>
 
-    <div class="map-section">
-        <h3>Lokasi Acara</h3>
-        <p>Klik tombol di bawah untuk melihat rute via Google Maps:</p>
-        <a href="https://maps.app.goo.gl/eHSD31kX3jjSyUaQ7" target="_blank" class="btn">📍 Buka Lokasi di Google Maps</a>
+    <div class="pull-text" id="pull-status">Tarik Tuas Untuk Membuka</div>
+  </div>
+
+  <main id="invitation-content">
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-subtitle">We're Getting Married</div>
+        <div class="hero-names">Irina & Robert</div>
+        <div class="hero-date">22 Oktober 2026</div>
+      </div>
     </div>
 
-    <script>
-        var audio = document.getElementById("myAudio");
-        var statusSpan = document.getElementById("music-status");
+    <div class="quote-box">
+      "It's a love story, baby, just say, 'Yes'."
+    </div>
 
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                statusSpan.innerText = "Pause";
-            } else {
-                audio.pause();
-                statusSpan.innerText = "Play Musik";
-            }
-        }
+    <section class="countdown-section">
+      <h2 class="section-title">Hitung Mundur</h2>
+      <div class="countdown-timer">
+        <div class="time-unit"><div class="time-num" id="cd-days">00</div><div class="time-lbl">Hari</div></div>
+        <div class="time-unit"><div class="time-num" id="cd-hours">00</div><div class="time-lbl">Jam</div></div>
+        <div class="time-unit"><div class="time-num" id="cd-mins">00</div><div class="time-lbl">Menit</div></div>
+        <div class="time-unit"><div class="time-num" id="cd-secs">00</div><div class="time-lbl">Detik</div></div>
+      </div>
+    </section>
 
-        // Musik otomatis play saat layar disentuh/diklik pertama kali
-        document.body.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play();
-                statusSpan.innerText = "Pause";
-            }
-        }, { once: true });
-    </script>
+    <section class="gallery-section">
+      <h2 class="section-title">Kenangan Kami</h2>
+      <div class="gallery-grid">
+        <img src="foto1.JPG" alt="Kenangan 1">
+        <img src="foto2.JPG" alt="Kenangan 2">
+        <img src="foto3.JPG" alt="Kenangan 3">
+        <img src="foto4.JPG" alt="Kenangan 4">
+        <img src="foto5.JPG" alt="Kenangan 5">
+        <img src="foto6.JPG" alt="Kenangan 6">
+      </div>
+    </section>
 
+    <section class="event-section">
+      <div class="event-card">
+        <h4>Akad & Resepsi</h4>
+        <p><strong>Kamis, 22 Oktober 2026</strong></p>
+        <p>Pukul 10:00 - Selesai</p>
+        <br>
+        <p><strong>The Secret Garden Ballroom</strong></p>
+        <p>Jl. Kenangan Indah No. 123</p>
+        <a href="https://maps.app.goo.gl/eHSD31kX3jjSyUaQ7" target="_blank" class="btn-maps">
+          📍 Buka di Google Maps
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Audio Player Controller
+    const audio = document.getElementById('bg-audio');
+    const musicBtn = document.getElementById('music-toggle');
+
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play().then(() => {
+          musicBtn.innerText = '🎵';
+        }).catch(err => console.log('Playback error:', err));
+      } else {
+        audio.pause();
+        musicBtn.innerText = '🔇';
+      }
+    }
+
+    // Inisialisasi Slot Machine
+    const targetDay = "22";
+    const targetMonth = "OKT";
+    const targetYear = "2026";
+
+    const days = ["♡", "10", "14", "18", "20", "22"];
+    const months = ["♡", "MAR", "JUN", "AGU", "SEP", "OKT"];
+    const years = ["♡", "2024", "2025", "2025", "2026", "2026"];
+
+    function populateReel(id, items) {
+      const el = document.getElementById(id);
+      el.innerHTML = '';
+      items.forEach(val => {
+        const item = document.createElement('div');
+        item.className = 'reel-item';
+        item.innerText = val;
+        el.appendChild(item);
+      });
+    }
+
+    populateReel('reel-day', days);
+    populateReel('reel-month', months);
+    populateReel('reel-year', years);
+
+    let hasPulled = false;
+
+    function pullLever() {
+      if (hasPulled) return;
+      hasPulled = true;
+
+      // Putar lagu Love Story
+      audio.play().catch(() => {});
+
+      // Animasi Tuas
+      const lever = document.getElementById('lever');
+      lever.classList.add('lever-pulled');
+      document.getElementById('pull-status').innerText = 'Memutar Tanggal...';
+
+      setTimeout(() => {
+        lever.classList.remove('lever-pulled');
+      }, 500);
+
+      // Gerakkan Gulungan Angka
+      const itemHeight = 64;
+      const targetDayIndex = days.lastIndexOf(targetDay);
+      const targetMonthIndex = months.lastIndexOf(targetMonth);
+      const targetYearIndex = years.lastIndexOf(targetYear);
+
+      document.getElementById('reel-day').style.transform = `translateY(-${targetDayIndex * itemHeight}px)`;
+      document.getElementById('reel-month').style.transform = `translateY(-${targetMonthIndex * itemHeight}px)`;
+      document.getElementById('reel-year').style.transform = `translateY(-${targetYearIndex * itemHeight}px)`;
+
+      // Setelah gulungan berhenti
+      setTimeout(() => {
+        // Konfeti Emas
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#c5a059', '#e8c887', '#ffffff', '#ff9a9e']
+        });
+
+        // Transisi halus membuka layar undangan
+        setTimeout(() => {
+          const slotScreen = document.getElementById('slot-screen');
+          slotScreen.style.opacity = '0';
+          setTimeout(() => {
+            slotScreen.style.display = 'none';
+          }, 1000);
+        }, 1200);
+
+      }, 3500);
+    }
+
+    // Countdown Timer (Menuju 22 Oktober 2026)
+    const targetDate = new Date('October 22, 2026 10:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance > 0) {
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('cd-days').innerText = d < 10 ? '0' + d : d;
+        document.getElementById('cd-hours').innerText = h < 10 ? '0' + h : h;
+        document.getElementById('cd-mins').innerText = m < 10 ? '0' + m : m;
+        document.getElementById('cd-secs').innerText = s < 10 ? '0' + s : s;
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 </body>
 </html>
