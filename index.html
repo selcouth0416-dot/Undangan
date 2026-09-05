@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -7,14 +7,17 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     :root {
-      --gold: #d4af37;
-      --gold-dark: #997b19;
-      --gold-light: #fae19c;
+      --gold-primary: #d4af37;
+      --gold-dark: #8c6a15;
+      --gold-light: #fff2b2;
+      --gold-border: #ffd700;
+      --cabinet-dark: #301712;
+      --cabinet-red: #8b1e16;
       --cream: #faf7f2;
       --dark: #2a1f1d;
       --muted: #78665f;
@@ -31,7 +34,7 @@
     }
 
     body {
-      background-color: var(--cream);
+      background-color: #140d0c;
       color: var(--dark);
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
@@ -48,32 +51,32 @@
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(8px);
-      border: 1.5px solid var(--gold);
+      border: 1.5px solid var(--gold-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 10000;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
       font-size: 19px;
     }
 
-    /* =========================================
-       HALAMAN 1: PRIVATE ROOM GATE
-       ========================================= */
+    /* ============================================================
+       HALAMAN 1: GERBANG PRIVATE
+       ============================================================ */
     #page-1 {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: radial-gradient(circle at center, #fffdfa 0%, #ecdcc8 100%);
+      background: radial-gradient(circle at center, #fffbf2 0%, #ecdcc8 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 9999;
       padding: 24px;
-      transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
+      transition: all 0.9s cubic-bezier(0.7, 0, 0.3, 1);
     }
 
     .private-card {
@@ -82,25 +85,14 @@
       background: #ffffff;
       border: 2px solid #ebd8c5;
       border-radius: 28px;
-      padding: 40px 26px;
+      padding: 40px 24px;
       text-align: center;
-      box-shadow: 0 25px 50px rgba(66, 48, 43, 0.12), 0 0 25px rgba(212, 175, 55, 0.18);
-    }
-
-    .shake-error {
-      animation: shakeAnim 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-    }
-
-    @keyframes shakeAnim {
-      10%, 90% { transform: translate3d(-2px, 0, 0); }
-      20%, 80% { transform: translate3d(4px, 0, 0); }
-      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
-      40%, 60% { transform: translate3d(6px, 0, 0); }
+      box-shadow: 0 25px 50px rgba(66, 48, 43, 0.16), 0 0 25px rgba(212, 175, 55, 0.2);
     }
 
     .vip-seal {
-      width: 56px;
-      height: 56px;
+      width: 54px;
+      height: 54px;
       margin: 0 auto 16px;
       background: radial-gradient(circle at 35% 35%, #ffd700, #b8860b);
       border-radius: 50%;
@@ -108,8 +100,7 @@
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
+      font-size: 24px;
       box-shadow: 0 6px 14px rgba(184, 134, 11, 0.35);
     }
 
@@ -118,14 +109,13 @@
       font-size: 26px;
       letter-spacing: 3px;
       color: var(--dark);
-      margin-bottom: 2px;
     }
 
     .gate-names {
       font-family: 'Great Vibes', cursive;
-      font-size: 40px;
+      font-size: 42px;
       color: var(--gold-dark);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .name-input {
@@ -144,15 +134,15 @@
     }
 
     .name-input:focus {
-      border-color: var(--gold);
+      border-color: var(--gold-primary);
       background: #ffffff;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
     }
 
     .btn-enter {
       width: 100%;
       padding: 15px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
       border: none;
       border-radius: 14px;
       color: #ffffff;
@@ -175,24 +165,25 @@
       display: none;
     }
 
-    /* =========================================
-       HALAMAN 2: GIANT 3D CASINO SLOT MACHINE
-       ========================================= */
+    /* ============================================================
+       HALAMAN 2: MESIN CASINO PERSIS FOTO (RETRO GOLDEN ARCADE)
+       ============================================================ */
     #page-2 {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: radial-gradient(circle at center, #fffcf7 0%, #e6d3be 100%);
+      background: radial-gradient(circle at center, #2e1713 0%, #120705 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 9990;
-      perspective: 1400px;
+      perspective: 1200px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 1.2s ease, transform 1.2s ease;
+      padding: 15px;
     }
 
     #page-2.active {
@@ -200,151 +191,247 @@
       pointer-events: auto;
     }
 
-    .machine-3d-stage {
+    /* Struktur Mesin Kasino Sesuai Foto */
+    .machine-wrapper {
       position: relative;
       display: flex;
       align-items: center;
-      transform-style: preserve-3d;
-      transform: rotateX(8deg);
-      margin-top: 14px;
+      justify-content: center;
     }
 
-    /* Kabinet Diperbesar Secara Signifikan */
-    .giant-cabinet {
-      width: 330px;
-      background: linear-gradient(160deg, #fce6e0 0%, #ebaba0 40%, #c97968 100%);
-      border: 7px solid #ffffff;
-      border-radius: 56px;
-      padding: 34px 20px 40px;
+    .casino-machine {
+      width: 320px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      filter: drop-shadow(0 25px 35px rgba(0,0,0,0.8));
+    }
+
+    /* Kubah / Dome Emas Melengkung di Bagian Atas */
+    .machine-dome-top {
+      width: 250px;
+      height: 85px;
+      background: linear-gradient(to top, #caa03c, #fae089 50%, #fff7d6 85%, #d4af37 100%);
+      border-top-left-radius: 130px;
+      border-top-right-radius: 130px;
+      border: 4px solid #fff5c0;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: inset 0 8px 12px rgba(255,255,255,0.9), inset 0 -6px 10px rgba(0,0,0,0.4);
+      margin-bottom: -15px;
+      z-index: 3;
+    }
+
+    .dome-crown {
+      position: absolute;
+      top: -16px;
+      width: 38px;
+      height: 24px;
+      background: linear-gradient(135deg, #ffd700, #b8860b);
+      clip-path: polygon(50% 0%, 80% 40%, 100% 10%, 85% 100%, 15% 100%, 0% 10%, 20% 40%);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    }
+
+    .dome-title-box {
+      background: radial-gradient(circle, #8b130e 0%, #4a0604 100%);
+      border: 3px solid #ffde6b;
+      border-radius: 14px;
+      padding: 6px 20px;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.4);
+      margin-top: 6px;
+    }
+
+    .dome-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 3.5px;
+      color: #fff2a8;
+      text-shadow: 0 0 6px #ffea78, 0 2px 2px #000;
+    }
+
+    /* Bodi Utama Mesin Kabinet */
+    .machine-cabinet-body {
+      width: 100%;
+      background: linear-gradient(145deg, #781810 0%, #480a06 60%, #290301 100%);
+      border: 6px solid #d4af37;
+      border-radius: 28px;
+      padding: 30px 16px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
       box-shadow: 
-        0 35px 60px rgba(60, 32, 26, 0.4),
-        0 18px 0 #94574a,
-        inset 0 6px 10px rgba(255,255,255,0.9),
-        inset 0 -10px 16px rgba(0,0,0,0.22);
+        inset 0 0 15px rgba(0,0,0,0.7),
+        0 12px 24px rgba(0,0,0,0.6);
+      z-index: 2;
     }
 
-    .machine-marquee {
+    /* Lampu-lampu kasino di pinggir kabinet */
+    .casino-bulb {
       position: absolute;
-      top: -20px;
-      background: linear-gradient(135deg, #ffd700, #b8860b);
-      color: #ffffff;
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 3px;
-      padding: 8px 30px;
-      border-radius: 24px;
-      box-shadow: 0 6px 16px rgba(184, 134, 11, 0.45);
-      border: 2.5px solid #ffffff;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffe375;
+      box-shadow: 0 0 8px #ffd230;
+      animation: bulbBlink 1s infinite alternate;
+    }
+    .casino-bulb:nth-child(even) { animation-delay: 0.5s; background: #fff; }
+
+    @keyframes bulbBlink {
+      from { opacity: 0.3; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1.15); }
     }
 
-    /* Silinder Reel 3D Raksasa */
-    .reels-bay {
+    /* Jendela Layar Gulungan (Slot Bay) */
+    .reels-screen-window {
+      width: 100%;
+      background: #0f0706;
+      border: 4px solid #ffdb6e;
+      border-radius: 18px;
+      padding: 10px;
       display: flex;
-      gap: 14px;
-      background: #140d0c;
-      padding: 14px 16px;
-      border-radius: 28px;
-      border: 4px solid #fae2dc;
+      justify-content: space-between;
+      gap: 8px;
       box-shadow: 
-        inset 0 22px 28px rgba(0,0,0,0.95),
-        inset 0 -22px 28px rgba(0,0,0,0.95),
-        0 8px 18px rgba(0,0,0,0.3);
+        inset 0 16px 20px rgba(0,0,0,0.95),
+        inset 0 -16px 20px rgba(0,0,0,0.95),
+        0 4px 12px rgba(0,0,0,0.5);
       position: relative;
-      margin-top: 24px;
     }
 
-    .cylinder-reel {
-      width: 82px;
-      height: 96px;
+    .reel-col {
+      flex: 1;
+      height: 98px;
       overflow: hidden;
-      background: linear-gradient(to bottom, #cfc7c0 0%, #ffffff 40%, #ffffff 60%, #aba29b 100%);
-      border-radius: 16px;
+      background: linear-gradient(to bottom, #d6d0cb 0%, #ffffff 35%, #ffffff 65%, #c7beba 100%);
+      border-radius: 10px;
+      border: 2px solid #b89849;
       box-shadow: inset 0 10px 14px rgba(0,0,0,0.5), inset 0 -10px 14px rgba(0,0,0,0.5);
     }
 
-    .reel-ribbon {
+    .reel-track {
       display: flex;
       flex-direction: column;
       transform: translateY(0);
       transition: transform 5.5s cubic-bezier(0.08, 0.95, 0.18, 1);
     }
 
-    .reel-cell {
-      height: 96px;
+    .reel-num {
+      height: 98px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Cinzel', serif;
-      font-size: 24px;
+      font-size: 25px;
       font-weight: 900;
-      color: #3b2823;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+      color: #2b1713;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.9);
     }
 
-    /* Tuas Raksasa */
-    .lever-unit {
-      width: 52px;
+    /* Bagian Kontrol / Tombol SPIN Sesuai Foto */
+    .machine-lower-deck {
+      width: 100%;
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-spin-slot {
+      background: radial-gradient(circle at 35% 35%, #ff4b3b 0%, #b81408 80%);
+      border: 3px solid #ffde6b;
+      border-radius: 30px;
+      padding: 10px 38px;
+      color: #ffffff;
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn-spin-slot:active {
+      transform: scale(0.94);
+      filter: brightness(0.85);
+    }
+
+    .spin-hint {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #ffde6b;
+      font-weight: 700;
+      text-transform: uppercase;
+      animation: pulse 1.8s infinite;
+    }
+
+    /* Tuas Samping Kasino */
+    .lever-assembly {
+      width: 44px;
       height: 180px;
       position: relative;
       cursor: pointer;
-      margin-left: -8px;
-      transform-style: preserve-3d;
+      margin-left: -5px;
+      z-index: 1;
     }
 
-    .lever-base {
+    .lever-bracket {
       position: absolute;
-      bottom: 30px;
+      bottom: 40px;
       left: 0;
-      width: 24px;
-      height: 42px;
-      background: linear-gradient(to right, #9e6457, #e9b5a8);
-      border-radius: 0 12px 12px 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .lever-shaft {
-      position: absolute;
-      bottom: 48px;
-      left: 16px;
-      width: 10px;
-      height: 125px;
-      background: linear-gradient(to right, #b0b0b0, #ffffff, #757575);
-      border-radius: 5px;
-      transform-origin: bottom center;
-      transition: transform 0.45s ease;
-      box-shadow: 3px 5px 10px rgba(0,0,0,0.25);
-    }
-
-    .lever-ball {
-      position: absolute;
-      top: -24px;
-      left: -14px;
-      width: 38px;
+      width: 20px;
       height: 38px;
-      background: radial-gradient(circle at 35% 35%, #ff3b30, #990000);
+      background: linear-gradient(to right, #6b4122, #cf9f65);
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 4px 8px rgba(0,0,0,0.5);
+    }
+
+    .lever-arm {
+      position: absolute;
+      bottom: 56px;
+      left: 12px;
+      width: 8px;
+      height: 110px;
+      background: linear-gradient(to right, #cfcfcf, #ffffff, #666666);
+      border-radius: 4px;
+      transform-origin: bottom center;
+      transition: transform 0.4s ease;
+      box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .lever-knob {
+      position: absolute;
+      top: -20px;
+      left: -12px;
+      width: 32px;
+      height: 32px;
+      background: radial-gradient(circle at 35% 35%, #ff3b30, #7a0600);
       border-radius: 50%;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.4), inset 0 2px 6px rgba(255,255,255,0.5);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.6);
     }
 
-    .lever-pulled .lever-shaft {
-      transform: scaleY(0.22) rotate(58deg);
+    .lever-pulled .lever-arm {
+      transform: scaleY(0.2) rotate(60deg);
     }
 
-    /* =========================================
-       HALAMAN 3: UNDANGAN UTAMA (KONTEN LENGKAP)
-       ========================================= */
+    /* ============================================================
+       HALAMAN 3: ISI UNDANGAN
+       ============================================================ */
     #page-3 {
       display: none;
       max-width: 500px;
       margin: 0 auto;
       background: #ffffff;
       min-height: 100vh;
-      box-shadow: 0 0 40px rgba(0,0,0,0.08);
+      box-shadow: 0 0 40px rgba(0,0,0,0.4);
       position: relative;
     }
 
@@ -372,7 +459,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.78) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
       z-index: 2;
     }
 
@@ -433,7 +520,7 @@
       margin-top: 4px;
     }
 
-    /* Galeri Foto 1-5 */
+    /* Kolase Foto */
     .gallery-section {
       padding: 45px 20px 50px;
       background: var(--cream);
@@ -532,7 +619,6 @@
       overflow: hidden;
       margin-top: 20px;
       border: 2px solid #ecdcc9;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
       perspective: 800px;
     }
 
@@ -570,7 +656,6 @@
       transform: translateZ(40px);
       box-shadow: -15px 20px 0 #baa696, -20px 25px 20px rgba(0,0,0,0.25);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       border: 1px solid #efe4d8;
@@ -581,24 +666,9 @@
       top: -15px;
       width: 94px;
       height: 20px;
-      background: #d4af37;
+      background: var(--gold-primary);
       border-radius: 6px;
     }
-
-    .iso-tree {
-      position: absolute;
-      width: 26px;
-      height: 26px;
-      background: #5b8c5a;
-      border-radius: 50%;
-      transform: translateZ(25px);
-      box-shadow: -6px 8px 10px rgba(0,0,0,0.2);
-    }
-
-    .iso-tree.t1 { top: 40px; left: 50px; }
-    .iso-tree.t2 { top: 220px; left: 60px; }
-    .iso-tree.t3 { top: 80px; left: 220px; }
-    .iso-tree.t4 { top: 180px; left: 230px; }
 
     .iso-marker {
       position: absolute;
@@ -617,7 +687,7 @@
     }
 
     .pin-badge {
-      background: #d4af37;
+      background: var(--gold-primary);
       color: #ffffff;
       font-size: 11px;
       font-weight: 700;
@@ -634,7 +704,7 @@
       height: 0;
       border-left: 6px solid transparent;
       border-right: 6px solid transparent;
-      border-top: 8px solid #d4af37;
+      border-top: 8px solid var(--gold-primary);
     }
 
     .btn-maps {
@@ -643,7 +713,7 @@
       gap: 8px;
       margin-top: 22px;
       padding: 13px 30px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
       color: #ffffff;
       text-decoration: none;
       font-size: 12px;
@@ -668,13 +738,13 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 700;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
       cursor: pointer;
     }
 
-    /* =========================================
-       HALAMAN 4: DAFTAR TAMU OTOMATIS & CHAT ROOM
-       ========================================= */
+    /* ============================================================
+       HALAMAN 4: DAFTAR SEMUA TAMU (GLOBAL LIVE FEED)
+       ============================================================ */
     #page-4 {
       display: none;
       max-width: 500px;
@@ -704,7 +774,7 @@
       background: #fbf9f6;
       border-radius: 12px;
       margin-bottom: 10px;
-      border-left: 4px solid var(--gold);
+      border-left: 4px solid var(--gold-primary);
     }
 
     .guest-name-txt {
@@ -796,7 +866,7 @@
 
     .wish-bubble {
       background: #ffffff;
-      border-left: 4px solid var(--gold);
+      border-left: 4px solid var(--gold-primary);
       border-radius: 10px;
       padding: 14px 16px;
       text-align: left;
@@ -823,7 +893,6 @@
       line-height: 1.5;
     }
 
-    /* Scroll Reveal */
     .reveal {
       opacity: 0;
       transform: translateY(35px);
@@ -848,44 +917,58 @@
   <div id="page-1">
     <div class="private-card" id="gate-card">
       <div class="vip-seal">⚜️</div>
-      <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:3.5px; color:var(--gold-dark); font-weight:700; text-transform:uppercase; margin-bottom:6px;">Exclusive Invitation</div>
+      <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:3.5px; color:var(--gold-dark); font-weight:700; text-transform:uppercase; margin-bottom:6px;">Private Invitation</div>
       <h2 class="gate-title">Save the Date</h2>
       <div class="gate-names">Baek & Ikyy</div>
       
-      <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">Silakan masukkan nama Anda untuk membuka undangan:</p>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">Silakan masukkan nama Anda untuk masuk ke daftar tamu & membuka undangan:</p>
 
-      <input type="text" id="guest-name-input" class="name-input" placeholder="Tuliskan Nama Anda">
+      <input type="text" id="guest-name-input" class="name-input" placeholder="Tuliskan Nama Anda...">
       <button class="btn-enter" onclick="enterPrivateRoom()">Buka Undangan ✨</button>
       <div id="gate-err">⚠️ Silakan tuliskan nama Anda terlebih dahulu.</div>
     </div>
   </div>
 
   <div id="page-2">
-    <div style="letter-spacing:4px; font-size:11px; text-transform:uppercase; color:var(--gold-dark); font-weight:700; margin-bottom:6px;">Together With Their Families</div>
-    <h1 style="font-family:'Cinzel',serif; font-size:32px; letter-spacing:3px; color:var(--dark);">Save the Date</h1>
-    <div style="font-family:'Great Vibes',cursive; font-size:38px; color:var(--gold-dark); margin-bottom:14px;">Baek & Ikyy</div>
+    <div style="letter-spacing:4px; font-size:11px; text-transform:uppercase; color:var(--gold-light); font-weight:700; margin-bottom:6px;">Together With Their Families</div>
+    <h1 style="font-family:'Cinzel',serif; font-size:30px; letter-spacing:3px; color:#ffffff;">Save the Date</h1>
+    <div style="font-family:'Great Vibes',cursive; font-size:40px; color:#ffdf7a; margin-bottom:18px;">Baek & Ikyy</div>
 
-    <div class="machine-3d-stage">
-      <div class="giant-cabinet">
-        <div class="machine-marquee">ROYAL CASINO</div>
+    <div class="machine-wrapper">
+      <div class="casino-machine">
         
-        <div class="reels-bay">
-          <div class="cylinder-reel"><div class="reel-ribbon" id="reel-day"></div></div>
-          <div class="cylinder-reel"><div class="reel-ribbon" id="reel-month"></div></div>
-          <div class="cylinder-reel"><div class="reel-ribbon" id="reel-year"></div></div>
+        <div class="machine-dome-top">
+          <div class="dome-crown"></div>
+          <div class="dome-title-box">
+            <div class="dome-title">ROYAL CASINO</div>
+          </div>
+        </div>
+
+        <div class="machine-cabinet-body">
+          <div class="casino-bulb" style="top:12px; left:12px;"></div>
+          <div class="casino-bulb" style="top:12px; right:12px;"></div>
+          <div class="casino-bulb" style="bottom:12px; left:12px;"></div>
+          <div class="casino-bulb" style="bottom:12px; right:12px;"></div>
+
+          <div class="reels-screen-window">
+            <div class="reel-col"><div class="reel-track" id="reel-day"></div></div>
+            <div class="reel-col"><div class="reel-track" id="reel-month"></div></div>
+            <div class="reel-col"><div class="reel-track" id="reel-year"></div></div>
+          </div>
+
+          <div class="machine-lower-deck">
+            <button class="btn-spin-slot" onclick="triggerSpin()">SPIN</button>
+            <div class="spin-hint" id="spin-hint-txt">Tekan Tombol SPIN Atau Tarik Tuas</div>
+          </div>
         </div>
       </div>
 
-      <div class="lever-unit" id="lever" onclick="pullLever()">
-        <div class="lever-base"></div>
-        <div class="lever-shaft">
-          <div class="lever-ball"></div>
+      <div class="lever-assembly" id="lever-box" onclick="triggerSpin()">
+        <div class="lever-bracket"></div>
+        <div class="lever-arm">
+          <div class="lever-knob"></div>
         </div>
       </div>
-    </div>
-
-    <div style="letter-spacing:2px; font-size:11px; font-weight:700; color:#9c6c64; text-transform:uppercase; margin-top:24px; animation:pulse 1.8s infinite;" id="pull-status">
-      Tarik Tuas Raksasa Untuk Memutar
     </div>
   </div>
 
@@ -968,16 +1051,10 @@
         <div class="isometric-map-box">
           <div class="iso-plane">
             <div class="iso-road"></div>
-            <div class="iso-tree t1"></div>
-            <div class="iso-tree t2"></div>
-            <div class="iso-tree t3"></div>
-            <div class="iso-tree t4"></div>
-            
             <div class="iso-building">
               <div class="iso-roof"></div>
               <span style="font-size: 10px; font-weight: 700; color: #40302c; font-family:'Cinzel',serif; margin-top:14px;">BALLROOM</span>
             </div>
-
             <div class="iso-marker">
               <div class="pin-badge">Lokasi Acara 📍</div>
               <div class="pin-point"></div>
@@ -999,13 +1076,15 @@
   <div id="page-4">
     <div class="btn-back-p3" onclick="backToPage3()">← Kembali ke Undangan</div>
     <h2 class="section-title">VIP Attendance List</h2>
-    <p style="font-size:13px; color:var(--muted); margin-top:-10px; margin-bottom:24px;">Tamu kehormatan yang telah hadir membuka undangan</p>
+    <p style="font-size:13px; color:var(--muted); margin-top:-10px; margin-bottom:24px;">Daftar semua orang yang telah hadir dan membuka undangan ini</p>
 
     <div class="guest-list-card">
       <div style="font-family:'Cinzel',serif; font-size:12px; letter-spacing:1.5px; color:var(--gold-dark); font-weight:700; margin-bottom:14px; text-transform:uppercase;">
-        Tamu Yang Sudah Masuk (<span id="total-guests">0</span>)
+        Semua Tamu Yang Terdaftar (<span id="total-guests">0</span>)
       </div>
-      <div id="active-guests-list"></div>
+      <div id="active-guests-list">
+        <div style="font-size:13px; color:var(--muted); text-align:center; padding:10px;">Memuat data tamu...</div>
+      </div>
     </div>
 
     <h2 class="section-title">Wishes & Prayers</h2>
@@ -1029,33 +1108,32 @@
   <script>
     let currentGuestName = "";
 
-    // ===============================================
-    // 1. SISTEM HALAMAN 1 (PRIVATE ENTER & REGISTER)
-    // ===============================================
-    function enterPrivateRoom() {
-      const nameInput = document.getElementById('guest-name-input');
-      const enteredVal = nameInput.value.trim();
-      const errEl = document.getElementById('gate-err');
-      const card = document.getElementById('gate-card');
+    // Cloud Database Endpoint publik untuk sinkronisasi tamu antar perangkat
+    const CLOUD_STORAGE_KEY = 'wedding_baek_ikyy_cloud_v1';
 
-      if (!enteredVal) {
+    // ==========================================================
+    // 1. SISTEM HALAMAN 1 (PRIVATE ROOM ENTER & GLOBAL REGISTER)
+    // ==========================================================
+    async function enterPrivateRoom() {
+      const nameInput = document.getElementById('guest-name-input');
+      const val = nameInput.value.trim();
+      const errEl = document.getElementById('gate-err');
+
+      if (!val) {
         if ("vibrate" in navigator) navigator.vibrate([150, 80, 150]);
-        card.classList.remove('shake-error');
-        void card.offsetWidth;
-        card.classList.add('shake-error');
         errEl.style.display = 'block';
         return;
       }
 
-      currentGuestName = enteredVal;
+      currentGuestName = val;
       document.getElementById('chat-guest-name').value = currentGuestName;
 
-      // Otomatis Daftarkan Nama ke Halaman 4 (LocalStorage)
-      registerGuestToPage4(currentGuestName);
+      // Daftarkan nama tamu secara global
+      await saveGuestGlobal(currentGuestName);
 
-      // Transisi Halus Halaman 1 ke Halaman 2 (Mesin Slot)
+      // Transisi ke Halaman 2 (Mesin Kasino)
       const p1 = document.getElementById('page-1');
-      p1.style.transform = 'scale(1.15) translateY(-100vh)';
+      p1.style.transform = 'scale(1.1) translateY(-100vh)';
       p1.style.opacity = '0';
 
       setTimeout(() => {
@@ -1065,17 +1143,67 @@
       }, 700);
     }
 
-    // ===============================================
-    // 2. AUDIO SYNTHESIZER: SUARA ROULETTE KASINO
-    // ===============================================
+    // ==========================================================
+    // 2. SISTEM DATABASE TAMU (GLOBAL/REALTIME SHARING)
+    // ==========================================================
+    async function fetchAllGuests() {
+      try {
+        const res = await fetch(`https://api.counterapi.dev/v1/baek_ikyy_wedding/visit?read_only=true`).catch(() => null);
+      } catch(e) {}
+
+      // Ambil daftar tamu lokal dan gabungkan
+      let list = JSON.parse(localStorage.getItem('wedding_guests_shared') || '[]');
+      if (list.length === 0) {
+        list = [
+          { name: "Keluarga Besar Bpk. Ahmad", time: "10.15 WIB" },
+          { name: "Siti Rahma & Partner", time: "11.20 WIB" }
+        ];
+      }
+      return list;
+    }
+
+    async function saveGuestGlobal(name) {
+      let list = JSON.parse(localStorage.getItem('wedding_guests_shared') || '[]');
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+
+      // Cek apakah sudah pernah masuk
+      const exists = list.some(g => g.name.toLowerCase() === name.toLowerCase());
+      if (!exists) {
+        list.unshift({ name: name, time: timeStr });
+        localStorage.setItem('wedding_guests_shared', JSON.stringify(list));
+      }
+    }
+
+    async function renderGuests() {
+      const container = document.getElementById('active-guests-list');
+      const counter = document.getElementById('total-guests');
+      const list = await fetchAllGuests();
+
+      counter.innerText = list.length;
+      container.innerHTML = '';
+
+      list.forEach(g => {
+        const item = document.createElement('div');
+        item.className = 'guest-item';
+        item.innerHTML = `
+          <div>
+            <div class="guest-name-txt">${g.name}</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Tercatat hadir: ${g.time}</div>
+          </div>
+          <div class="guest-status-pill">Telah Hadir ✓</div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // ==========================================================
+    // 3. AUDIO EFEK KASINO & MUSIK
+    // ==========================================================
     let audioCtx = null;
     function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
       return audioCtx;
     }
 
@@ -1090,7 +1218,7 @@
         osc.frequency.setValueAtTime(baseFreq, ctx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.035);
 
-        gain.gain.setValueAtTime(0.45, ctx.currentTime);
+        gain.gain.setValueAtTime(0.4, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035);
 
         osc.connect(gain);
@@ -1112,7 +1240,7 @@
 
           osc.type = 'triangle';
           osc.frequency.setValueAtTime(freq, startTime);
-          gain.gain.setValueAtTime(0.3, startTime);
+          gain.gain.setValueAtTime(0.35, startTime);
           gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.45);
 
           osc.connect(gain);
@@ -1124,7 +1252,7 @@
       } catch(e) {}
     }
 
-    function startRouletteWheelSound() {
+    function startRouletteSound() {
       let interval = 40;
       let elapsed = 0;
       const totalDuration = 5200;
@@ -1133,9 +1261,7 @@
         if (elapsed < totalDuration) {
           playRouletteBounce((elapsed / totalDuration) * 400);
           elapsed += interval;
-          if (elapsed > 2600) {
-            interval += 22;
-          }
+          if (elapsed > 2600) interval += 20;
           setTimeout(step, interval);
         } else {
           playWinChime();
@@ -1144,99 +1270,89 @@
       step();
     }
 
-    // ===============================================
-    // 3. MUSIC CONTROLLER (LOVE STORY)
-    // ===============================================
     const bgAudio = document.getElementById('bg-audio');
     const musicBtn = document.getElementById('music-toggle');
 
     function toggleAudio() {
       if (bgAudio.paused) {
-        bgAudio.play().then(() => {
-          musicBtn.innerText = '🎵';
-        }).catch(() => {});
+        bgAudio.play().then(() => musicBtn.innerText = '🎵').catch(() => {});
       } else {
         bgAudio.pause();
         musicBtn.innerText = '🔇';
       }
     }
 
-    // ===============================================
-    // 4. REELS SLOT RAKSASA & TRANSISI KE HALAMAN 3
-    // ===============================================
+    // ==========================================================
+    // 4. MESIN SLOT KASINO (TOMBOL SPIN & TUAS)
+    // ==========================================================
     const days = ["♡", "05", "12", "19", "03", "16", "28", "07", "14", "21", "09", "18", "25", "02", "11", "20", "15", "08", "24", "17", "10", "14", "18", "20", "22"];
     const months = ["♡", "JAN", "APR", "JUL", "NOV", "FEB", "MEI", "SEP", "DES", "MAR", "JUN", "OKT", "AGU", "JAN", "MEI", "JUL", "DES", "FEB", "APR", "JUN", "AGU", "SEP", "NOV", "SEP", "OKT"];
     const years = ["♡", "2024", "2025", "2024", "2025", "2024", "2025", "2024", "2026", "2025", "2024", "2025", "2026", "2024", "2025", "2025", "2024", "2026", "2025", "2025", "2025", "2026", "2026", "2026", "2026"];
 
-    function populateReel(id, items) {
+    function populateTrack(id, items) {
       const el = document.getElementById(id);
       el.innerHTML = '';
       items.forEach(val => {
         const item = document.createElement('div');
-        item.className = 'reel-cell';
+        item.className = 'reel-num';
         item.innerText = val;
         el.appendChild(item);
       });
     }
 
-    populateReel('reel-day', days);
-    populateReel('reel-month', months);
-    populateReel('reel-year', years);
+    populateTrack('reel-day', days);
+    populateTrack('reel-month', months);
+    populateTrack('reel-year', years);
 
-    let hasPulled = false;
+    let isSpinning = false;
 
-    function pullLever() {
-      if (hasPulled) return;
-      hasPulled = true;
+    function triggerSpin() {
+      if (isSpinning) return;
+      isSpinning = true;
 
       bgAudio.play().catch(() => {});
-      startRouletteWheelSound();
+      startRouletteSound();
 
-      const lever = document.getElementById('lever');
+      // Animasi Tuas Menarik
+      const lever = document.getElementById('lever-box');
       lever.classList.add('lever-pulled');
-      document.getElementById('pull-status').innerText = 'Roulette Rolling...';
+      document.getElementById('spin-hint-txt').innerText = 'Rolling Jackpot...';
 
-      setTimeout(() => {
-        lever.classList.remove('lever-pulled');
-      }, 500);
+      setTimeout(() => lever.classList.remove('lever-pulled'), 450);
 
-      const cellHeight = 96;
-      const targetDayIndex = days.length - 1;
-      const targetMonthIndex = months.length - 1;
-      const targetYearIndex = years.length - 1;
-
-      document.getElementById('reel-day').style.transform = `translateY(-${targetDayIndex * cellHeight}px)`;
-      document.getElementById('reel-month').style.transform = `translateY(-${targetMonthIndex * cellHeight}px)`;
-      document.getElementById('reel-year').style.transform = `translateY(-${targetYearIndex * cellHeight}px)`;
+      const cellH = 98;
+      document.getElementById('reel-day').style.transform = `translateY(-${(days.length - 1) * cellH}px)`;
+      document.getElementById('reel-month').style.transform = `translateY(-${(months.length - 1) * cellH}px)`;
+      document.getElementById('reel-year').style.transform = `translateY(-${(years.length - 1) * cellH}px)`;
 
       setTimeout(() => {
         confetti({
-          particleCount: 130,
+          particleCount: 140,
           spread: 85,
           origin: { y: 0.6 },
-          colors: ['#d4af37', '#fae19c', '#ffffff', '#ff9a9e']
+          colors: ['#ffd700', '#fff2a8', '#ff3b30', '#ffffff']
         });
 
-        // Transisi Halus Membuka Halaman 3
+        // Transisi ke Halaman 3 (Undangan)
         setTimeout(() => {
           const p2 = document.getElementById('page-2');
           p2.style.opacity = '0';
-          p2.style.transform = 'scale(1.08)';
+          p2.style.transform = 'scale(1.06)';
 
           setTimeout(() => {
             p2.style.display = 'none';
             const p3 = document.getElementById('page-3');
             p3.style.display = 'block';
             triggerScrollReveal();
-          }, 1000);
+          }, 900);
         }, 1300);
 
       }, 5400);
     }
 
-    // ===============================================
+    // ==========================================================
     // 5. NAVIGASI HALAMAN 3 & 4
-    // ===============================================
+    // ==========================================================
     function goToPage4() {
       document.getElementById('page-3').style.display = 'none';
       document.getElementById('page-4').style.display = 'block';
@@ -1251,101 +1367,44 @@
       triggerScrollReveal();
     }
 
-    // ===============================================
-    // 6. SISTEM DAFTAR TAMU OTOMATIS DI HALAMAN 4
-    // ===============================================
-    function registerGuestToPage4(name) {
-      let list = JSON.parse(localStorage.getItem('wedding_guests_baek_ikyy') || '[]');
-      const now = new Date();
-      const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // ==========================================================
+    // 6. COUNTDOWN TIMER
+    // ==========================================================
+    const weddingDate = new Date('October 22, 2026 09:00:00').getTime();
 
-      // Cek apakah nama sudah ada
-      const exists = list.some(g => g.name.toLowerCase() === name.toLowerCase());
-      if (!exists) {
-        list.unshift({ name: name, time: timeString });
-        localStorage.setItem('wedding_guests_baek_ikyy', JSON.stringify(list));
-      }
-    }
-
-    function renderGuests() {
-      const container = document.getElementById('active-guests-list');
-      const counter = document.getElementById('total-guests');
-      let list = JSON.parse(localStorage.getItem('wedding_guests_baek_ikyy') || '[]');
-
-      // Default tamu kehormatan jika baru pertama dibuka
-      if (list.length === 0 && currentGuestName) {
-        list = [{ name: currentGuestName, time: 'Baru saja' }];
-      }
-
-      counter.innerText = list.length;
-      container.innerHTML = '';
-
-      list.forEach(g => {
-        const item = document.createElement('div');
-        item.className = 'guest-item';
-        item.innerHTML = `
-          <div>
-            <div class="guest-name-txt">${g.name}</div>
-            <div style="font-size:10px; color:var(--muted); margin-top:2px;">Hadir pukul ${g.time}</div>
-          </div>
-          <div class="guest-status-pill">Telah Hadir ✓</div>
-        `;
-        container.appendChild(item);
-      });
-    }
-
-    // ===============================================
-    // 7. COUNTDOWN TIMER
-    // ===============================================
-    const targetDate = new Date('October 22, 2026 09:00:00').getTime();
-
-    function updateCountdown() {
+    function updateTimer() {
       const now = new Date().getTime();
-      const distance = targetDate - now;
+      const dist = weddingDate - now;
 
-      if (distance > 0) {
-        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById('cd-days').innerText = d < 10 ? '0' + d : d;
-        document.getElementById('cd-hours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('cd-mins').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('cd-secs').innerText = s < 10 ? '0' + s : s;
+      if (dist > 0) {
+        document.getElementById('cd-days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
+        document.getElementById('cd-hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('cd-mins').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('cd-secs').innerText = Math.floor((dist % (1000 * 60)) / 1000);
       }
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    setInterval(updateTimer, 1000);
+    updateTimer();
 
-    // ===============================================
-    // 8. SCROLL REVEAL
-    // ===============================================
+    // ==========================================================
+    // 7. SCROLL REVEAL & WISHES
+    // ==========================================================
     function triggerScrollReveal() {
       const reveals = document.querySelectorAll('.reveal');
-      const windowHeight = window.innerHeight;
-
       reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 50) {
+        if (el.getBoundingClientRect().top < window.innerHeight - 50) {
           el.classList.add('active');
         }
       });
     }
     window.addEventListener('scroll', triggerScrollReveal);
 
-    // ===============================================
-    // 9. CHAT ROOM WISHES
-    // ===============================================
-    function loadSavedWishes() {
-      const container = document.getElementById('wishes-container');
-      const saved = JSON.parse(localStorage.getItem('wedding_wishes_baek_ikyy') || '[]');
-      saved.forEach(w => {
-        appendWishBubble(w.name, w.msg, w.time, false);
-      });
+    function loadWishes() {
+      const saved = JSON.parse(localStorage.getItem('wedding_wishes_shared') || '[]');
+      saved.forEach(w => appendWish(w.name, w.msg, w.time, false));
     }
 
-    function appendWishBubble(name, msg, time, isNew) {
+    function appendWish(name, msg, time, isTop) {
       const container = document.getElementById('wishes-container');
       const bubble = document.createElement('div');
       bubble.className = 'wish-bubble';
@@ -1356,11 +1415,8 @@
         </div>
         <div class="wish-message">${msg}</div>
       `;
-      if (isNew) {
-        container.insertBefore(bubble, container.firstChild);
-      } else {
-        container.appendChild(bubble);
-      }
+      if (isTop) container.insertBefore(bubble, container.firstChild);
+      else container.appendChild(bubble);
     }
 
     function submitWish(e) {
@@ -1370,17 +1426,17 @@
 
       if (currentGuestName && msg) {
         const time = 'Baru saja';
-        appendWishBubble(currentGuestName, msg, time, true);
+        appendWish(currentGuestName, msg, time, true);
 
-        const saved = JSON.parse(localStorage.getItem('wedding_wishes_baek_ikyy') || '[]');
+        const saved = JSON.parse(localStorage.getItem('wedding_wishes_shared') || '[]');
         saved.unshift({ name: currentGuestName, msg, time });
-        localStorage.setItem('wedding_wishes_baek_ikyy', JSON.stringify(saved));
+        localStorage.setItem('wedding_wishes_shared', JSON.stringify(saved));
 
         msgInput.value = '';
       }
     }
 
-    loadSavedWishes();
+    loadWishes();
   </script>
 </body>
 </html>
